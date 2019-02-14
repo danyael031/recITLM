@@ -1,0 +1,1 @@
+El formato de fecha se mandeja en año-mes-día para tener un cotrol coherente al organizar los nombres de los archivos, ya que de otra manera se pueden producir problemas con el orden.
