@@ -7,24 +7,45 @@
  *      Ejercicio ADC
  * 
  */
- 
+#include "ultraSonic.h"
+
 int led = 8;
 int entrada = A0;
 int valorEntrada = 0;
 float voltaje = 0;
-float valorPorBit = 0.004888;// valor por cada bit en un ADC de 10 bits con 5v de referencia
+float valorPorBit = 0.00488758553275;// valor por cada bit en un ADC de 10 bits con 5v de referencia
 
 long int tf = 0;
+
+hcsr04 ultrasonico;//declarando sensor ultrasónico
  
 void setup() {
 Serial.begin(9600);
 pinMode(led, OUTPUT);
-
+iniciarHCSR04(&ultrasonico); // iniciar Sensor hc-sr04
 tf = millis()+700;
+
 }
 
 void loop() {
-  valorEntrada = analogRead(entrada);
+analogo();
+
+
+}
+
+
+
+
+
+
+
+float calcularVoltaje(int valorDigital){
+  float resultado = (float)valorDigital * valorPorBit;
+  return resultado;
+  }
+
+void analogo(){
+    valorEntrada = analogRead(entrada);
   voltaje = calcularVoltaje(valorEntrada);
   if (tf <= millis()){
         Serial.println(voltaje);
@@ -36,10 +57,4 @@ void loop() {
   else {
     digitalWrite(led, HIGH);
   }
-
 }
-
-float calcularVoltaje(int valorDigital){
-  float resultado = (float)valorDigital * valorPorBit;
-  return resultado;
-  }
