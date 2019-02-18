@@ -7,7 +7,7 @@ title: "Reporte de práctica 1: Fotoresistencia"
 
 Para ésta práctica probamos el primer dispositivo optoelectrónico que manejaremos en la materia: la fotoresistencia. La fotoresistencia o fotorresistor es un componente electrónico cuya resistencia disminuye con el aumento de la intensidad de luz incidente.
 
-![Fotorresistencia](images/pr1/Fotocelda.jpg){ width=50% }
+![Fotorresistencia](images/Fotocelda.jpg){ width=50% }
 
 ## Características de la fotoresistencia
 
@@ -19,5 +19,5 @@ La variación del valor de la resistencia tiene cierto retardo, diferente si se 
 
 Para la práctica de la foto resistencia se realizaron los siguientes circuitos:
 
-![Circuito con fotorresistencia](images/pr1/FotoRes1.png){ width=50% }
-![Fotoresitencia, Bocina y 555](images/pr1/FotoRes2.png){ width=50% }
+![Circuito con fotorresistencia](images/FotoRes1.png){ width=50% }
+![Fotoresitencia, Bocina y 555](images/FotoRes2.png){ width=50% }

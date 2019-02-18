@@ -7,8 +7,8 @@ struct  hcsr04{
 };
 
 unsigned int distanciaHCSR04(hcsr04* ulSo , int selecUnidades = 0){
-    digitalWrite(ulSo->Trig, HIGH);
-    delayMicroseconds(10);
+    digitalWrite(ulSo->Trig, HIGH); //Enviando pulso al trigger del sensor
+    delayMicroseconds(10);// duración del pulso
     digitalWrite(ulSo->Trig, LOW);
     ulSo->inputSignal = pulseIn(ulSo->Echo, HIGH, 1000);
     ulSo->distanciaCM = ulSo->inputSignal / 58;

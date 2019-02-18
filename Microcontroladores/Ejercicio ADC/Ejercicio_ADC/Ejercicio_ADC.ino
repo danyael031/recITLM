@@ -7,7 +7,7 @@
  *      Ejercicio ADC
  * 
  */
-#include "ultraSonic.h"
+#include "HCSR04.h"
 
 int led = 8;
 int entrada = A0;
@@ -29,6 +29,7 @@ tf = millis()+700;
 
 void loop() {
 analogo();
+Serial.println(distanciaHCSR04(&ultrasonico));
 
 
 }
