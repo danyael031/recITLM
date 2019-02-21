@@ -13,7 +13,10 @@
 3. DESCRIBE LOS GRUPOS EN LOS QUE SE DIVIDEN LOS DISPOSITIVOS OPTOELECTRÓNICOS
 
 	Los circuitos optoelectrónicos se dividen de la siguiente manera:
-* 
+
+* __Fotosensibles:__ Pueden producir o controlar cambios en la energía eléctrica.
+* __Electroluminisentes:__ Son aquellos que producen luz.
+* __Fotovoltaicos:__ Son aquellos convierten la luz en electricidad.
 
 4. DEFINE QUE ES UNA FOTORRESISTENCIA (FR)  O LDR
 

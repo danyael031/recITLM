@@ -2,6 +2,7 @@
 title: "Fototiristor LASCR"
 author: "Dan Yael Sajarópulos Verdugo, Jesús Manuel Verdugo López"
 date: "Febrero de 2019"
+lang: es
 ---
 
 # Concepto
