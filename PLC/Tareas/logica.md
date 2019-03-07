@@ -1,3 +1,7 @@
+---
+title: "Lógica cableada y lógica programable"
+author: "Dan Yael Sajarópulos Verdugo"
+---
 
 # Lógica cableada
 
