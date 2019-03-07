@@ -4,60 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practica5"
+        xmlns:med="clr-namespace:Medidor;assembly=medidor"
+        xmlns:ter="clr-namespace:Termometro;assembly=Termometro"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="509.574">
     <Grid Margin="-1,0,1,0">
-        <Ellipse Height="220" Margin="133,62,0,0" Stroke="Black" VerticalAlignment="Top" HorizontalAlignment="Left" Width="220">
-            <Ellipse.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF766E6E" Offset="1"/>
-                </LinearGradientBrush>
-            </Ellipse.Fill>
-        </Ellipse>
-        <Ellipse x:Name="elips" Margin="153,82,0,0" Stroke="Black" HorizontalAlignment="Left" Width="180" Height="180" VerticalAlignment="Top" Fill="#FFD1D1D1"/>
-        <Ellipse HorizontalAlignment="Left" Height="15" Margin="171,241,0,0" VerticalAlignment="Top" Width="15" Stroke="Black">
-            <Ellipse.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Ellipse.Fill>
-        </Ellipse>
-        <Ellipse HorizontalAlignment="Left" Height="15" Margin="300,241,0,0" Stroke="Black" VerticalAlignment="Top" Width="15">
-            <Ellipse.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Ellipse.Fill>
-        </Ellipse>
+        <ter:Termometro x:Name="terTermometro" Margin="258,22,140,120"></ter:Termometro>
+        <med:ControlMedidor x:Name="MedidorPPM" ValorMinimo="100" ValorMaximo="10000" Margin="20,37,244,106"></med:ControlMedidor>
         <Button x:Name="btConectar" Content="Conectar" HorizontalAlignment="Left" Margin="405,53,0,0" VerticalAlignment="Top" Width="75" Click="Boton_Click"/>
-        <Rectangle x:Name="Aguja" Fill="#FFB80000" HorizontalAlignment="Left" Height="94" Margin="240,78,0,0" Stroke="#FFB80000" VerticalAlignment="Top" Width="6" RenderTransformOrigin="0.5,0.996"/>
-        <Ellipse Fill="#FFB80000" Margin="236,165,0,0" Stroke="#FFB80000" Height="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="14"/>
         <ComboBox x:Name="cbConexion1" HorizontalAlignment="Left" Margin="360,26,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="CbConexion1_DropDownOpened"/>
-        <Label x:Name="lbVal" Content="0" HorizontalAlignment="Left" Margin="186,287,0,0" VerticalAlignment="Top" Height="45" Width="115" FontSize="20"/>
-        <Label Content="PPM" HorizontalAlignment="Left" Margin="224,332,0,0" VerticalAlignment="Top"/>
-        <Label Content="100" HorizontalAlignment="Left" Height="28" Margin="170,239,0,0" VerticalAlignment="Top" Width="67" FontSize="9" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="45"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <Label Content="10000" HorizontalAlignment="Left" Height="28" Margin="276,216,0,0" VerticalAlignment="Top" Width="67" FontSize="9" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-36.87"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
+
 
     </Grid>
 </Window>

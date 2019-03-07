@@ -26,7 +26,7 @@ namespace AplicacionPLC
 
         }
         private EventArgs e;
-        private SerialPort puerto = new SerialPort();
+        public SerialPort puerto = new SerialPort();
         private string nombrePuerto;
         private double distancia;
         private double temperatura;
@@ -253,7 +253,7 @@ namespace AplicacionPLC
         {
             double basura = 0;
             string[] elementosMensaje = data.Split('/');
-            if (elementosMensaje.Length == 10 &&
+            if (
                 elementosMensaje[0]== "~"
                 )                
             {
@@ -306,26 +306,25 @@ namespace AplicacionPLC
         private void Puerto_DataReceived(object sender, SerialDataReceivedEventArgs e) // agregar los actuadores al arduino
         {
             string mensaje = puerto.ReadTo("\n");
-            //string[] elementosMensaje;
-            //if (ComprobarData(mensaje, out elementosMensaje))
-            //{
+            string[] elementosMensaje;
+            if (ComprobarData(mensaje, out elementosMensaje))
+            {
+
             //    NombreArduino = elementosMensaje[1];
-            //    Temperatura = Convert.ToDouble(elementosMensaje[4]);
-            //    Humedad = Convert.ToDouble(elementosMensaje[3]);
+                Temperatura = Convert.ToDouble(elementosMensaje[2]);
+                Humedad = Convert.ToDouble(elementosMensaje[1]);
             //    Distancia = Convert.ToDouble(elementosMensaje[2]);
             //    Luz = Convert.ToDouble(elementosMensaje[5]);
-            try
-            {
-                Gas = Convert.ToDouble(mensaje);
+            
+                Gas = Convert.ToDouble(elementosMensaje[3]);
                 DataReceived?.Invoke(this, e);
-            }
-            catch { }
+            
             
             //}
             //else
             //{
 
-            //}
+            }
         }
 
 

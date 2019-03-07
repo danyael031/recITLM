@@ -13,3 +13,8 @@ C:\Users\Dan\source\repos\Practica5\Practica5\obj\Debug\Practica5.csproj.Generat
 C:\Users\Dan\source\repos\Practica5\Practica5\obj\Debug\Practica5.csproj.CoreCompileInputs.cache
 C:\Users\Dan\source\repos\Practica5\Practica5\obj\Debug\Practica5.exe
 C:\Users\Dan\source\repos\Practica5\Practica5\obj\Debug\Practica5.pdb
+C:\Users\Dan\source\repos\Practica5\Practica5\bin\Debug\medidor.dll
+C:\Users\Dan\source\repos\Practica5\Practica5\bin\Debug\medidor.pdb
+C:\Users\Dan\source\repos\Practica5\Practica5\obj\Debug\Practica5.csproj.CopyComplete
+C:\Users\Dan\source\repos\Practica5\Practica5\bin\Debug\Termometro.dll
+C:\Users\Dan\source\repos\Practica5\Practica5\bin\Debug\Termometro.pdb

@@ -27,7 +27,6 @@ namespace Practica5
         public MainWindow()
         {
             InitializeComponent();
-            ReiniciarAguja();
         }
 
         private void Boton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +39,7 @@ namespace Practica5
                 if (arduino1.IsConected)
                 {
                     arduino1.DataReceived += Arduino1_DataReceived;
+                    arduino1.puerto.WriteLine("0\n");
                     btConectar.Content = "Desconectar";
                 }
             }
@@ -49,7 +49,7 @@ namespace Practica5
                 {
                     arduino1.DataReceived -= Arduino1_DataReceived;
                     btConectar.Content = "Conectar";
-                    ReiniciarAguja();
+                    MedidorPPM.ReiniciarAguja();
                 }
             }
         }
@@ -57,31 +57,28 @@ namespace Practica5
         private void Arduino1_DataReceived(Arduino sender, EventArgs args)
         {
             Action chAguja = () => {
-                RotateTransform rt = new RotateTransform(CambiarAguja(arduino1.Gas,100,10000));
-                Aguja.RenderTransform = rt;
+                MedidorPPM.Valor = arduino1.Gas;
             };
-            Action chLabel = () => {
-                lbVal.Content = Convert.ToString(arduino1.Gas);
+            Action actTemp = () => {
+                terTermometro.Value = CalcularIndiceCalor(arduino1.Temperatura, arduino1.Humedad);
             };
-            Aguja.Dispatcher.Invoke(chAguja);
-            lbVal.Dispatcher.Invoke(chLabel);
 
-        }
+            MedidorPPM.Dispatcher.Invoke(chAguja);
+            terTermometro.Dispatcher.Invoke(actTemp);
 
-        private double CambiarAguja(double Val, double LimInf, double LimSup)
-        {
-            /*
-             *hacer los cálculos necesarios para convertir el valor del sensor a la salida de la aguja
-             * probablemente sea necesario que la aguja ponga los valores de acuerdo a una funsión logarítmica..
-             * aún no tengo ni puta idea de cómo hacerlo
-             */
-            double rango = LimSup - LimInf;
-            double escalon = 270 / rango;
+            arduino1.puerto.WriteLine("1\n");
 
-            double grados = ((Val - LimInf )* escalon) - 135;
+            //if (terTermometro.Value < 21)
+            //{
+            //    arduino1.puerto.WriteLine("1");
+            //}
+            //else if(terTermometro.Value > 21)
+            //{
+            //    arduino1.puerto.WriteLine("0");
+            //}
 
-            return grados;
 
+            
 
         }
 
@@ -96,12 +93,13 @@ namespace Practica5
             }
         }
 
-        private void ReiniciarAguja()
+        private double CalcularIndiceCalor(double GradoCentigrados, double R)
         {
-            RotateTransform Ri = new RotateTransform(-135);
-            Aguja.RenderTransform = Ri;
-            lbVal.Content = "0";
-            lbVal.HorizontalContentAlignment = HorizontalAlignment.Center;
+            double T = GradoCentigrados * 1.8 + 32;
+            double HeatIndex = (-42.379 + (2.04901523 * T) + (10.14333127 * R) - (0.22475541 * T * R) - (6.83783e-3 * T * T) - (5.481717e-2 * R * R) + (1.22874e-3 * T * T * R) + (8.5282e-4 * T * R * R) - (1.99e-6 * T * T * R * R));
+            double resultado = (HeatIndex - 32) / 1.8;
+            return resultado;
         }
+
     }
 }

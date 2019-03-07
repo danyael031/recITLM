@@ -14,7 +14,7 @@ const float punto0[] = {log10(X0),log10(Y0)};
 const float punto1[] = {log10(X1),log10(Y1)};
 
 const float scope = (punto1[1] - punto0[1])/(punto1[0] - punto0[0]);
-const float coord = punto0[1] + punto0[0] * scope;
+const float coord = punto0[1] - punto0[0] * scope;
 
 void setup() {
   // put your setup code here, to run once:
