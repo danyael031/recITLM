@@ -39,7 +39,7 @@ namespace Practica5
                 if (arduino1.IsConected)
                 {
                     arduino1.DataReceived += Arduino1_DataReceived;
-                    arduino1.puerto.WriteLine("0\n");
+                    arduino1.EnviarComando(" ");
                     btConectar.Content = "Desconectar";
                 }
             }
@@ -49,7 +49,9 @@ namespace Practica5
                 {
                     arduino1.DataReceived -= Arduino1_DataReceived;
                     btConectar.Content = "Conectar";
+                    
                     MedidorPPM.ReiniciarAguja();
+
                 }
             }
         }
@@ -65,17 +67,6 @@ namespace Practica5
 
             MedidorPPM.Dispatcher.Invoke(chAguja);
             terTermometro.Dispatcher.Invoke(actTemp);
-
-            arduino1.puerto.WriteLine("1\n");
-
-            //if (terTermometro.Value < 21)
-            //{
-            //    arduino1.puerto.WriteLine("1");
-            //}
-            //else if(terTermometro.Value > 21)
-            //{
-            //    arduino1.puerto.WriteLine("0");
-            //}
 
 
             

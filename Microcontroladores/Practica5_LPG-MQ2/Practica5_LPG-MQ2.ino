@@ -1,6 +1,16 @@
 #include "DHT11.h"
+#define REL1 3
+#define REL2 7
+
 
 dht11 sens;
+
+
+char datSer[4];
+
+//bool flagSendData = false;
+int estRel1 = HIGH;
+int estRel2 = HIGH;
 
 const int pinMQ2 = A0;
 const int resModulo = 5;
@@ -46,34 +56,50 @@ float calcularConcentracion(float cocienteRSRO)
   return pow(10, A * log(cocienteRSRO) + B);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void enviarDatos(){
   leerDHT11(&sens);
   float rs = leerSensorMQ(pinMQ2);
   float concentracion = calcularConcentracion(rs)/resSalida;
 
-  
-
-  //Serial.print("Concentración = ");
   Serial.print("~/");
   Serial.print(sens.B[0]);
   Serial.print("/");
   Serial.print(sens.B[2]);
   Serial.print("/");
   Serial.print(concentracion);
-  Serial.println("/");
+  Serial.print("/\n");
+}
 
-//  while(!(Serial.available() > 0)){
-//    // read the incoming byte:
-//    int incomingByte = Serial.read();
-//    Serial.println(incomingByte);
-//
-//    if(incomingByte == 0){
-//      digitalWrite(7,HIGH);
-//    }
-//    else if(incomingByte == 1){
-//      digitalWrite(7,LOW);
-//    }
-//  }
+void serialEvent() {
+  Serial.readBytes(datSer, 4);
+  Serial.print(datSer[0]);
+  Serial.print("/");
+  Serial.print(datSer[1]);
+  Serial.print("/");
+  Serial.print(datSer[2]);
+  Serial.print("/");
+  Serial.print("\n");
+  
+
+  if(datSer[3] == 10){
+    if(datSer[0] == 64){//@
+      enviarDatos();
+    }
+    else if(datSer[0] == 32){// espacio
+      
+      estRel1 = (datSer[1] == 49) ? LOW : HIGH ;
+      estRel2 = (datSer[2] == 49) ? LOW : HIGH ;
+      digitalWrite(REL1, estRel1);
+      digitalWrite(REL2, estRel2);
+    }
+  }
+
+  for(int i = 0; i <= 3; i ++){
+    datSer[i] = 0x00;
+  }
+}
+
+void loop() {
+  
   
 }

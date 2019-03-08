@@ -266,37 +266,40 @@ namespace AplicacionPLC
                 return false;
             }
         }
-        public void EnviarComando(string PC, string Comando)
+        public void EnviarComando(string Comando)
         {
             if (isConected)
             {
-                if (Comando == "50")//El comando 50 es para solicitar la informacion de los sensores y los actuadores
-                {
-                    puerto.WriteLine("~/" + PC + "/" + Comando + "/\n");//aquí se manda una linea de texto al arduino para que el arduino responda con la información de los actuadores
-                }
-                else if (Comando == "51")//El comando 51 es para modificar los actuadores y solicita la información de los sensores
-                {
-                    int bu, ac1, ac2;
-                    if (Buzzer)//no le puedo mandar un true o un false al arduino así que cree variables enteras para mandar un 0 o un 1
-                        bu = 1;// este va a ser el valor que le mandaré a arduino
-                    else
-                        bu = 0;
-                    if (Actuador1)
-                        ac1 = 1;
-                    else
-                        ac1 = 0;
-                    if (Actuador2)
-                        ac2 = 1;
-                    else
-                        ac2 = 0;
-                    // en la siguiente linea se manda la información al arduino que incluye el PC, comando, el buzzer, el actuador1(ventilador) y el actuador2(bomba); los manda separados por diagonales y en el formato que pide el arduino
-                    puerto.WriteLine("~/" + PC + "/" + Comando + "/" + bu + "/" + ac1 + "/" + ac2 + "/\n");
-                }
-                else if (Comando == "desconectar")
-                {
-                    puerto.WriteLine("~/" + PC + "/51/0/0/0/\n");
+                int ac1 = (Actuador1) ? 1 : 0;
+                int ac2 = (Actuador2) ? 1 : 0;
+                puerto.Write(Comando+ac1+ac2);
+                //if (Comando == "50")//El comando 50 es para solicitar la informacion de los sensores y los actuadores
+                //{
+                //    puerto.WriteLine("~/" + PC + "/" + Comando + "/\n");//aquí se manda una linea de texto al arduino para que el arduino responda con la información de los actuadores
+                //}
+                //else if (Comando == "51")//El comando 51 es para modificar los actuadores y solicita la información de los sensores
+                //{
+                //    int bu, ac1, ac2;
+                //    if (Buzzer)//no le puedo mandar un true o un false al arduino así que cree variables enteras para mandar un 0 o un 1
+                //        bu = 1;// este va a ser el valor que le mandaré a arduino
+                //    else
+                //        bu = 0;
+                //    if (Actuador1)
+                //        ac1 = 1;
+                //    else
+                //        ac1 = 0;
+                //    if (Actuador2)
+                //        ac2 = 1;
+                //    else
+                //        ac2 = 0;
+                //    // en la siguiente linea se manda la información al arduino que incluye el PC, comando, el buzzer, el actuador1(ventilador) y el actuador2(bomba); los manda separados por diagonales y en el formato que pide el arduino
+                //    puerto.WriteLine("~/" + PC + "/" + Comando + "/" + bu + "/" + ac1 + "/" + ac2 + "/\n");
+                //}
+                //else if (Comando == "desconectar")
+                //{
+                //    puerto.WriteLine("~/" + PC + "/51/0/0/0/\n");
 
-                }
+                //}
             }
 
         }
