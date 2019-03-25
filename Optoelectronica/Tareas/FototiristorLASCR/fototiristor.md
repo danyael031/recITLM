@@ -5,6 +5,8 @@ date: "Febrero de 2019"
 lang: es
 ---
 
+\tableofcontents
+
 # Concepto
 
 El término tiristor, incluye todos los dispositivos semiconductores los cuales presentan un funcionamiento inherente como dispositivos de corte y conducción, poseen una estructura de cuatro capas PNPN con tres uniones PN intermedias y tres terminales accesibles denominadas ánodo, cátodo y compuerta (gate). Existen dos formas de operación, una es bidireccional (Triac) y la otra es unidireccional (SCR). Los fototiristores (LASCR o Rectificador controlado de silicio fotoactivo) son como los fototransistores o FET muy similares a sus correspondientes convencionales, excepto en la adición de una ventana o lente para enfocar la luz en un área apropiada. 
