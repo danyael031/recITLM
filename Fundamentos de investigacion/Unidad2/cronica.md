@@ -10,4 +10,4 @@ En el siglo XIV ya existía interés en desarrollar el razonamiento artificial, 
 
 
 * Logros de Watson
-* Mantenerlo simple
+* Mencionar a Alpha go zero
