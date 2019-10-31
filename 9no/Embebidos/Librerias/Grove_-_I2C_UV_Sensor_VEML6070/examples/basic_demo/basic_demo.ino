@@ -1,5 +1,6 @@
 #include "Seeed_VEML6070.h"
 #include "botonColor.h"
+#include "vMedidor.h"
 #include<TFT.h>
 
 #define CS   10
@@ -11,6 +12,7 @@ TFT pantalla = TFT(CS, DC, RST);
 
 VEML6070 sensor;
 BotonColor botoncito = BotonColor(50,50,&pantalla,"Demo");
+vMedidor medUV = vMedidor(13,30,&pantalla);
 
 uint32_t UV_colors[] = {0x00ff00, 0xffff00, 0xff8000, 0xff0000, 0xff00ff};
 
@@ -29,6 +31,8 @@ err_t read_UV()
     Serial.println(step);
     RISK_LEVEL level=sensor.convert_to_risk_level(step);
     
+    botoncito.color = UV_colors[level];
+    botoncito.Text = UV_str[level];
     Serial.print("UV level is ");
     Serial.println(UV_str[level]);
     Serial.println(" ");
@@ -49,6 +53,7 @@ void setup()
     pantalla.background(BC.B, BC.G, BC.R);
     delay(1000);
     botoncito.Draw();
+    medUV.Draw();
     if(sensor.init())
     {
       Serial.println("init failed!!!");
@@ -62,8 +67,6 @@ void loop()
     {
       Serial.print("read UV sensor failed!!");
     }
-    botoncito.color = UV_colors[contar];
-    botoncito.Text = UV_str[contar];
     botoncito.UpdateDraw();
     //sensor.enable();
     //sensor.disable();

@@ -1,4 +1,6 @@
 #include "visualBrujula.h"
+#include <MechaQMC5883.h>
+#include <Wire.h>
 
 #include<TFT.h>
 
@@ -7,11 +9,12 @@
 #define RST  8  
 
 TFT pantalla = TFT(CS, DC, RST);
+MechaQMC5883 brujulita;
 
-VisualBrujula vbrujula = VisualBrujula(5,4,&pantalla);
-int angulo = 0;
+VisualBrujula vbrujula = VisualBrujula(5,4,&pantalla, &brujulita);
 
 void setup() {
+  Wire.begin();
   Serial.begin(9600);
   Serial.println("hola");
   pantalla.begin();
@@ -26,9 +29,6 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  angulo++;
-  vbrujula.SetAngulo(angulo);
   vbrujula.UpdateDraw();
-  Serial.println(angulo);
-  delay(100);
+  delay(300);
 }

@@ -1,13 +1,15 @@
-#include"visualBrujula.h"
+s#include"visualBrujula.h"
 
 //---------- Constructores----------
 VisualBrujula::VisualBrujula() : BaseVisualObjet(){}
-VisualBrujula::VisualBrujula(int x, int y, TFT *pantalla) : BaseVisualObjet(x,y,pantalla){
+VisualBrujula::VisualBrujula(int x, int y, TFT *pantalla, MechaQMC5883* Bruj) : BaseVisualObjet(x,y,pantalla){
   // Añadir la relación del sensor como puntero  
+  brujula = Bruj;
 }
 //----------
 
 void VisualBrujula::Draw(){
+  brujula->init();
   firstUpdate = true;
   Pantalla->setTextSize(1);
   auto BuC = VColor::WebColorToByte( cBlack );
@@ -26,6 +28,9 @@ void VisualBrujula::Draw(){
 }
 
 void VisualBrujula::UpdateDraw(){
+  
+  angulo = (int)(NorteMag())   + 100 ;
+  
   if (!firstUpdate){
       Pantalla->stroke(0, 0, 0);
       Pantalla->line(aguja.p1.x, aguja.p1.y, aguja.p2.x, aguja.p2.y);
@@ -55,4 +60,15 @@ void VisualBrujula::UpdateDraw(){
 
 void VisualBrujula::SetAngulo(int ang){
   angulo = ang;  
+}
+
+float VisualBrujula::NorteMag(){
+  brujula->read(&x, &y, &z,&azimuth);
+  geografico=azimuth+declinacion;
+  Serial.print( "Angulo: ");
+  Serial.println(geografico);
+  
+  
+  return geografico;
+  
 }
